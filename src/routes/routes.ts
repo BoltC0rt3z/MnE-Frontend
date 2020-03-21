@@ -1,11 +1,11 @@
-import test from '../components/test';
+import SideBar from '../components/SideBar/SideBar';
 import RoutesInterface from './typed';
 
 const routes: RoutesInterface[] = [
   {
     path: '/',
     exact: true,
-    component: test,
+    component: SideBar,
     id: 'home',
   },
 ];
