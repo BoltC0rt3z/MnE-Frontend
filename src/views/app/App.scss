@@ -1,4 +1,5 @@
 @import "~antd/dist/antd.css";
+@import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
 
 html,
 body, #root {
@@ -6,4 +7,6 @@ body, #root {
   margin: auto;
   overflow: auto;
   background-color: #fff;
+  font-family: 'Muli', sans-serif;
+  font-size: 16px;
 }

@@ -1,12 +1,11 @@
-import test from '../components/test';
-
+import Dashboard from '../components/Dashboard';
 import RoutesInterface from './typed';
 
 const routes: RoutesInterface[] = [
   {
     path: '/dashboard',
     exact: true,
-    component: test,
+    component: Dashboard,
     id: 'home',
   },
 ];

@@ -1,0 +1,58 @@
+@import '../../styles/global';
+.sideBar {
+  .companyName {
+    font-weight: bold;
+    font-size: 16px;
+  }
+  .companyNameDiv {
+    height: 64px;
+    color: $white;
+    background: $dark-gray;
+    line-height: 64px;
+    text-align: center;
+    padding-left: 24px;
+  }
+
+  .sideCollapseMenu {
+    float: right;
+    margin-left: 25px;
+  }
+
+  .avatarDetails {
+    height: 100px;
+    color: $white;
+    padding-left: 24px;
+    font-weight: bold;
+  }
+
+  .avatar {
+    margin: auto;
+  }
+
+  .avatarUsername {
+    @extend .avatar;
+    padding-left: 5px;
+  }
+
+  .fullName {
+    font-size: 14px;
+  }
+
+  .role {
+    font-size: 12px;
+  }
+
+  .title {
+    color: $white;
+    padding-left: 24px;
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+  :global(.ant-menu-item-selected) {
+    background: $sidebar-active-blue !important;
+  }
+  :global(.ant-menu-item) {
+    font-weight: bold;
+  }
+}

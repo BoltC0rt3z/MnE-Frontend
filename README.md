@@ -1,8 +1,8 @@
-# Reja
+# MnE
 
 ## Description
 
-**reja** is a web application
+**MnE** is a web application
 
 ## Table of Contents
 
