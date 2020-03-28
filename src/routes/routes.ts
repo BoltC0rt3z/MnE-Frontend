@@ -1,11 +1,11 @@
-import Dashboard from '../components/Dashboard';
+import Users from '../views/UsersTable';
 import RoutesInterface from './typed';
 
 const routes: RoutesInterface[] = [
   {
     path: '/dashboard',
     exact: true,
-    component: Dashboard,
+    component: Users,
     id: 'home',
   },
 ];

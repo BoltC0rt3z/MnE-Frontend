@@ -5,10 +5,21 @@ import AuthenticationHelper from '../../helpers/authentication';
 import apiErrorHandler from '../../services/apiErrorHandler';
 import UserAPI from '../../services/userAPI';
 import {
+  deleteUserFailure,
+  deleteUserSuccess,
+  editUsersFailure,
+  editUsersSuccess,
+  fetchUsersFailure,
+  fetchUsersSuccess,
   loginUserFailure,
-  loginUserSuccess
+  loginUserSuccess,
 } from '../actionCreator/userActions';
-import { LOGIN_USER } from '../constants/actionTypes';
+import {
+  DELETE_USER,
+  EDIT_USERS,
+  FETCH_USERS,
+  LOGIN_USER,
+} from '../constants/actionTypes';
 import { BaseAction } from '../reducers/typed';
 
 // LOGIN USER SAGA
@@ -18,7 +29,7 @@ export function* loginUserSaga(action: BaseAction) {
     const response = yield call(UserAPI.loginUser, loginData);
     const { data, message } = response.data;
     localStorage.setItem('jwt-token', data.token);
-    axios.defaults.headers.common.Authorization =  data.token;
+    axios.defaults.headers.common.Authorization = data.token;
     const decoded = yield call(AuthenticationHelper.decodeToken);
     const { userInfo } = decoded;
     yield put(loginUserSuccess(userInfo));
@@ -37,4 +48,59 @@ export function* loginUserSaga(action: BaseAction) {
 
 export function* watchLoginUserSaga() {
   yield takeLatest(LOGIN_USER, loginUserSaga);
+}
+
+export function* fetchUsersSaga(action: BaseAction) {
+  try {
+    const response = yield call(UserAPI.fetchUsers);
+    const { users } = response.data.data;
+
+    yield put(fetchUsersSuccess(users));
+  } catch (error) {
+    const errorMessage = apiErrorHandler(error);
+    toast.error(errorMessage);
+    yield put(fetchUsersFailure(errorMessage));
+  }
+}
+
+export function* watchUsersUserSaga() {
+  yield takeLatest(FETCH_USERS, fetchUsersSaga);
+}
+
+export function* editUsersSaga(action: any) {
+  try {
+    const { data, userId } = action;
+    const response = yield call(UserAPI.editUser, data, userId);
+    const { user } = response.data.data;
+    toast.success(response.data.message);
+
+    yield put(editUsersSuccess(user)); // TO DO.. ADD CORRECT RESPONSE
+  } catch (error) {
+    const errorMessage = apiErrorHandler(error);
+    toast.error(errorMessage);
+    yield put(editUsersFailure(errorMessage));
+  }
+}
+
+export function* watchEditUserSaga() {
+  yield takeLatest(EDIT_USERS, editUsersSaga);
+}
+
+export function* deleteUserSaga(action: any) {
+  try {
+    const { userId } = action;
+    const response = yield call(UserAPI.deleteUser, userId);
+    toast.success(response.data.message);
+    const { userId: deletedUserId } = response.data.data.user;
+
+    yield put(deleteUserSuccess(deletedUserId));
+  } catch (error) {
+    const errorMessage = apiErrorHandler(error);
+    toast.error(errorMessage);
+    yield put(deleteUserFailure(errorMessage));
+  }
+}
+
+export function* watchDeleteUserSaga() {
+  yield takeLatest(DELETE_USER, deleteUserSaga);
 }

@@ -22,7 +22,8 @@ export interface UserInterface {
 }
 
 export interface UserStateInterface {
-  currentUser: UserInterface | any;
-  isLoading: boolean,
-  error: null | string,
+  currentUser?: UserInterface | any;
+  isLoading: boolean;
+  error: null | string;
+  users: UserInterface[] | null;
 }

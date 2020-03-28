@@ -19,6 +19,7 @@ interface SidebarProps {
 }
 const SideBar = (props: SidebarProps) => {
   const { collapse, clickToCollapse } = props;
+  const { pathname } = window.location;
   return (
     <Layout className={styles.sideBar}>
       <Sider
@@ -66,6 +67,7 @@ const SideBar = (props: SidebarProps) => {
           mode="inline"
           defaultSelectedKeys={['3']}
           style={{ backgroundColor: '#282828' }}
+          selectedKeys={[pathname]}
         >
           <Menu.Item key="1" className={styles.menuItem}>
             <UserOutlined />
@@ -75,7 +77,7 @@ const SideBar = (props: SidebarProps) => {
             <VideoCameraOutlined />
             <span>Candidates</span>
           </Menu.Item>
-          <Menu.Item key="3">
+          <Menu.Item key="/dashboard">
             <UploadOutlined />
             <span>Users</span>
           </Menu.Item>

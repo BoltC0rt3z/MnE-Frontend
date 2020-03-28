@@ -1,7 +1,7 @@
 import {
   LOGIN_USER,
   LOGIN_USER_FAILURE,
-  LOGIN_USER_SUCCESS
+  LOGIN_USER_SUCCESS,
 } from '../constants/actionTypes';
 import { BaseAction } from './typed';
 import { UserStateInterface } from './typed';
@@ -10,6 +10,7 @@ const initialState: UserStateInterface = {
   currentUser: {},
   isLoading: false,
   error: null,
+  users: [],
 };
 
 const loginUserReducer = (state = initialState, action: BaseAction) => {
@@ -18,14 +19,12 @@ const loginUserReducer = (state = initialState, action: BaseAction) => {
       return {
         ...state,
         isLoading: true,
-        error: null,
       };
     case LOGIN_USER_SUCCESS:
       return {
         ...state,
         currentUser: action.response,
         isLoading: false,
-        error: null,
       };
     case LOGIN_USER_FAILURE:
       return {
