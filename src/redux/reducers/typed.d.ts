@@ -8,6 +8,10 @@ export interface BaseAction {
 export interface RoleInterface {
   id: number;
   roleName: string;
+  description?: string;
+  createdAt?: Date;
+  updatedAt?: Date;
+  users?: UserInterface[];
 }
 
 export interface UserInterface {
@@ -15,14 +19,28 @@ export interface UserInterface {
   fullName: string;
   email: string;
   gender: string;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt?: Date;
+  updatedAt?: Date;
   deletedAt: Date | null;
-  roles: RoleInterface[];
+  roles?: RoleInterface[];
 }
 
 export interface UserStateInterface {
   currentUser: UserInterface | any;
-  isLoading: boolean,
-  error: null | string,
+  users: UserInterface[];
+  isLoading: boolean;
+  error: null | string;
+}
+
+export interface RoleStateInterface {
+  roles: RoleInterface[];
+  role: RoleInterface | any;
+  isLoading: boolean;
+  assignLoading: boolean;
+  error: null | string;
+}
+
+export interface ModalStateInterface {
+  shouldOpen: boolean,
+  modalType: string,
 }

@@ -1,10 +1,9 @@
 import React, { Fragment } from 'react';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
-
-import '../../customStyles/toast.scss';
 import store from '../../redux/store';
 import Routes from '../../routes';
+import '../../styles/toast.scss';
 import './App.scss';
 
 const Wrapper = Fragment;

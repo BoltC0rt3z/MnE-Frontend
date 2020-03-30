@@ -1,5 +1,4 @@
-import React, { ReactNode, useState } from 'react';
-
+import React, { ReactNode, useState  } from 'react';
 import Contents from '../../components/Contents';
 import Header from '../../components/Header';
 import SideBar from '../../components/SideBar';

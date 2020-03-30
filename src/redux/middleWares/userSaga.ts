@@ -5,10 +5,12 @@ import AuthenticationHelper from '../../helpers/authentication';
 import apiErrorHandler from '../../services/apiErrorHandler';
 import UserAPI from '../../services/userAPI';
 import {
+  getUsersFailure,
+  getUsersSuccess,
   loginUserFailure,
-  loginUserSuccess
+  loginUserSuccess,
 } from '../actionCreator/userActions';
-import { LOGIN_USER } from '../constants/actionTypes';
+import { GET_USERS, LOGIN_USER } from '../constants/actionTypes';
 import { BaseAction } from '../reducers/typed';
 
 // LOGIN USER SAGA
@@ -37,4 +39,21 @@ export function* loginUserSaga(action: BaseAction) {
 
 export function* watchLoginUserSaga() {
   yield takeLatest(LOGIN_USER, loginUserSaga);
+}
+
+// GET ALL USERS
+export function* getAllUsersSaga(action: BaseAction) {
+  try {
+    const response = yield call(UserAPI.fetchUsers);
+    const { data } = response.data;
+    yield put(getUsersSuccess(data.users));
+  } catch (error) {
+    const errorMessage = apiErrorHandler(error);
+    toast.error(errorMessage);
+    yield put(getUsersFailure(errorMessage));
+  }
+}
+
+export function* watchGetAllUsersSaga() {
+  yield takeLatest(GET_USERS, getAllUsersSaga);
 }

@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect } from 'react';
 import { connect } from 'react-redux';
-import LoginForm from '../../components/LoginForm/index';
+import LoginForm from '../../components/Form/LoginForm/index';
 import AuthenticationHelper from '../../helpers/authentication';
 import { loginUser } from '../../redux/actionCreator/userActions';
 import { UserStateInterface } from '../../redux/reducers/typed';
